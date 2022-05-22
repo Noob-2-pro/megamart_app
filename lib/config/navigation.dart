@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:zucosi_app/constants.dart';
+import 'package:zucosi_app/presentation/views/cart/cart_screen.dart';
+import 'package:zucosi_app/presentation/views/home/home_page.dart';
+
 
 class RoutesGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case '/':
-      // return MaterialPageRoute(builder: (_) => HomeView());
-      case 'login':
-      // return MaterialPageRoute(builder: (_) => LoginView());
-      case 'post':
-      // var post = settings.arguments as Post;
-      // return MaterialPageRoute(builder: (_) => PostView(post: post));
+        return MaterialPageRoute(builder: (_) => HomePage());
+      case kCartRoute:
+        return MaterialPageRoute(builder: (_) => const CartScreen());
+
       default:
         return MaterialPageRoute(
             builder: (_) => Scaffold(

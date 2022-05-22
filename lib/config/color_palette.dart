@@ -7,4 +7,5 @@ class ColorPalette {
   static const textBlack = Color(0xff4B4A5A);
   static const selectedButton = Color(0xff6B718B);
   static const appBarColor = Color(0xffF3F4F6);
+  
 }

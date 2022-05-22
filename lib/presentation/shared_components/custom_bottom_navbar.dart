@@ -1,19 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
-import 'package:zucosi_app/core/services/bottom_navbar_provider.dart';
+import 'package:zucosi_app/constants.dart';
 import '../../config/color_palette.dart';
-import 'package:provider/provider.dart';
 
-class CutomBottomBar extends StatelessWidget {
+class CutomBottomBar extends StatefulWidget {
   CutomBottomBar({Key? key}) : super(key: key);
+
+  @override
+  State<CutomBottomBar> createState() => _CutomBottomBarState();
+}
+
+class _CutomBottomBarState extends State<CutomBottomBar> {
+  int selectedIndex = 0;
+
 
   @override
   Widget build(BuildContext context) {
     return GNav(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      selectedIndex: context.watch<BottomNavBarProvider>().selectedIndex,
-      onTabChange: context.read<BottomNavBarProvider>().onItemTapped,
+      selectedIndex: selectedIndex,
       gap: 13.2.w,
       tabBackgroundColor: ColorPalette.selectedButton.withOpacity(0.1),
       tabMargin: EdgeInsets.only(top: 16.h, bottom: 32.h),
@@ -21,6 +27,14 @@ class CutomBottomBar extends StatelessWidget {
       textSize: Theme.of(context).textTheme.caption?.fontSize,
       color: ColorPalette.appGrey,
       padding: EdgeInsets.all(14),
+      onTabChange: (index) {
+        if (index == 1) {
+          Navigator.pushNamed(context, kCartRoute);
+          setState(() {
+           selectedIndex = 0;
+          });
+        }
+      },
       tabs: [
         GButton(
           icon: Icons.home_outlined,
@@ -28,7 +42,7 @@ class CutomBottomBar extends StatelessWidget {
         ),
         GButton(
           icon: Icons.shopping_bag_outlined,
-          text: "Cart",
+          onPressed: null,
         ),
       ],
       backgroundColor: Color(0xffFEFEFE),
