@@ -21,6 +21,12 @@ class CartScreen extends StatelessWidget {
           "Your Cart",
           style: Theme.of(context).textTheme.bodyText1,
         ),
+        leading: GestureDetector(
+          onTap: () {
+            Navigator.pop(context);
+          },
+          child: const Icon(Icons.navigate_before_rounded),
+        ),
       ),
       body: const Body(),
     );
@@ -69,9 +75,9 @@ class Body extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text(
+                  Text(
                     "Total price",
-                    style: TextStyle(fontSize: 16),
+                    style: TextStyle(fontSize: ScreenUtil().scaleText * 16),
                   ),
                   Flexible(
                     child: Text(
@@ -90,8 +96,11 @@ class Body extends StatelessWidget {
                   onPressed: () {},
                   child: SizedBox(
                       height: 64.h,
-                      child: const Center(
-                        child: Text('Payment'),
+                      child: Center(
+                        child: Text(
+                          'Payment',
+                          style: TextStyle(fontSize: ScreenUtil().scaleText * 16),
+                        ),
                       )),
                 ),
               )

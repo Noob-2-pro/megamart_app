@@ -22,13 +22,11 @@ class CartCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(
-                width: 80.h,
-                child: AspectRatio(
-                  aspectRatio: 0.8,
-                  child: Image.network(
-                    cart.product.image,
-                    fit: BoxFit.cover,
-                  ),
+                width: 80,
+                height: 80,
+                child: Image.network(
+                  cart.product.image,
+                  fit: BoxFit.cover,
                 ),
               ),
               Padding(
@@ -45,7 +43,7 @@ class CartCard extends StatelessWidget {
                             style: const TextStyle(fontSize: 12),
                           ),
                         ),
-                        SizedBox(width: 66.w),
+                        SizedBox(width: 60.w),
                         Text("\$ ${cart.product.price.toStringAsFixed(2)}"),
                       ],
                     ),
@@ -89,7 +87,7 @@ class CartCard extends StatelessWidget {
                             AddRemoveButton(
                               icon: Icons.remove,
                               onTap: () {
-                                Provider.of<CartViewModal>(context,listen: false).quantity(cart, -1);
+                                Provider.of<CartViewModal>(context, listen: false).quantity(cart, -1);
                               },
                             ),
                             Padding(
@@ -99,7 +97,7 @@ class CartCard extends StatelessWidget {
                             AddRemoveButton(
                               icon: Icons.add,
                               onTap: () {
-                                Provider.of<CartViewModal>(context,listen: false).quantity(cart, 1);
+                                Provider.of<CartViewModal>(context, listen: false).quantity(cart, 1);
                               },
                             ),
                           ],

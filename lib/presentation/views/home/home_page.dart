@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../shared_components/custom_bottom_navbar.dart';
+import 'package:zucosi_app/presentation/shared_components/custom_nav_bar.dart';
 import 'components/custom_app_bar.dart';
 import 'products_screen.dart';
 
@@ -16,7 +16,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const PreferredSize(preferredSize: Size.fromHeight(152), child: CustomAppBar()),
-      bottomNavigationBar: const CutomBottomBar(),
+      bottomNavigationBar: const CustomNavBar(),
       body: ProductsScreen(),
     );
   }
