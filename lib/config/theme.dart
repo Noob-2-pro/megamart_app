@@ -8,8 +8,8 @@ ThemeData theme() {
       fontFamily: "Poppins",
       textTheme: textTheme(),
       appBarTheme: AppBarTheme(
-        backgroundColor: Color(0xffF3F4F6),
-        toolbarTextStyle: TextStyle().copyWith(color: ColorPalette.appBlack),
+        backgroundColor: const Color(0xffF3F4F6),
+        toolbarTextStyle: const TextStyle().copyWith(color: ColorPalette.appBlack),
       ));
 }
 

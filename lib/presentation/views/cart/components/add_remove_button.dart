@@ -6,15 +6,16 @@ import '../../../../config/color_palette.dart';
 class AddRemoveButton extends StatelessWidget {
   const AddRemoveButton({
     Key? key,
-    required this.icon,
+    required this.icon, required this.onTap,
   }) : super(key: key);
 
   final IconData icon;
+  final Function() onTap;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: onTap,
       child: Container(
         width: 24.w,
         height: 24.w,

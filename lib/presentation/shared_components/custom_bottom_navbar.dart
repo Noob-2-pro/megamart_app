@@ -5,7 +5,7 @@ import 'package:zucosi_app/constants.dart';
 import '../../config/color_palette.dart';
 
 class CutomBottomBar extends StatefulWidget {
-  CutomBottomBar({Key? key}) : super(key: key);
+  const CutomBottomBar({Key? key}) : super(key: key);
 
   @override
   State<CutomBottomBar> createState() => _CutomBottomBarState();
@@ -26,7 +26,7 @@ class _CutomBottomBarState extends State<CutomBottomBar> {
       tabBorderRadius: 18,
       textSize: Theme.of(context).textTheme.caption?.fontSize,
       color: ColorPalette.appGrey,
-      padding: EdgeInsets.all(14),
+      padding: const EdgeInsets.all(14),
       onTabChange: (index) {
         if (index == 1) {
           Navigator.pushNamed(context, kCartRoute);
@@ -35,7 +35,7 @@ class _CutomBottomBarState extends State<CutomBottomBar> {
           });
         }
       },
-      tabs: [
+      tabs: const [
         GButton(
           icon: Icons.home_outlined,
           text: "Home",
@@ -45,7 +45,7 @@ class _CutomBottomBarState extends State<CutomBottomBar> {
           onPressed: null,
         ),
       ],
-      backgroundColor: Color(0xffFEFEFE),
+      backgroundColor: const Color(0xffFEFEFE),
     );
   }
 }

@@ -8,7 +8,7 @@ class RoutesGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case '/':
-        return MaterialPageRoute(builder: (_) => HomePage());
+        return MaterialPageRoute(builder: (_) => const HomePage());
       case kCartRoute:
         return MaterialPageRoute(builder: (_) => const CartScreen());
 

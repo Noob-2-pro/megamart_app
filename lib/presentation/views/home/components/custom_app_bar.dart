@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../config/color_palette.dart';
 
 class CustomAppBar extends StatelessWidget {
-  CustomAppBar({Key? key}) : super(key: key);
+  const CustomAppBar({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,14 +24,14 @@ class CustomAppBar extends StatelessWidget {
               children: [
                 InkWell(
                   onTap: () {},
-                  child: Icon(
+                  child: const Icon(
                     Icons.short_text_rounded,
                   ),
                 ),
-                Spacer(),
+                const Spacer(),
                 InkWell(
                   onTap: () {},
-                  child: Icon(
+                  child: const Icon(
                     Icons.search,
                   ),
                 ),

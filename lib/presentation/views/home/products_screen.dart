@@ -3,6 +3,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:zucosi_app/core/modals/products.dart';
 import 'package:zucosi_app/core/viewModals/home_viewmodal.dart';
 import '../../../../config/color_palette.dart';
+import 'package:provider/provider.dart';
+
+import '../../../core/viewModals/cart_viewmodal.dart';
 
 class ProductsScreen extends StatelessWidget {
   ProductsScreen({
@@ -26,7 +29,7 @@ class ProductsScreen extends StatelessWidget {
             if (snapshot.hasData) {
               final products = snapshot.data!;
               return GridView.builder(
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
                   mainAxisSpacing: 13,
                   crossAxisSpacing: 13,
@@ -40,14 +43,14 @@ class ProductsScreen extends StatelessWidget {
                 },
               );
             }
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           }),
     );
   }
 }
 
 class ProductTile extends StatelessWidget {
-  ProductTile({
+  const ProductTile({
     Key? key,
     required this.product,
   }) : super(key: key);
@@ -94,9 +97,14 @@ class ProductTile extends StatelessWidget {
                       ),
                       InkWell(
                         onTap: () {
-                          //TODO : add to cart here
+                          context.read<CartViewModal>().addproducts(product, 1);
+                          ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                            content: Text("Product added to the cart"),
+                            duration: Duration(seconds: 2),
+                          ));
                         },
-                        child: Icon(
+                        child: const Icon(
                           Icons.shopping_bag_outlined,
                           color: ColorPalette.appGrey,
                         ),

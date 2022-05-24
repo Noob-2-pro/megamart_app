@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
+import 'package:zucosi_app/core/viewModals/cart_viewmodal.dart';
 
 import '../../../../config/color_palette.dart';
+import '../../../../core/modals/cart.dart';
 import 'add_remove_button.dart';
 
 class CartCard extends StatelessWidget {
-  const CartCard({
-    Key? key,
-  }) : super(key: key);
+  const CartCard({Key? key, required this.cart}) : super(key: key);
+
+  final CartStuff cart;
 
   @override
   Widget build(BuildContext context) {
@@ -18,9 +21,15 @@ class CartCard extends StatelessWidget {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Image.asset(
-                "assets/images/Rectangle_1.png",
-                width: 80.w,
+              SizedBox(
+                width: 80.h,
+                child: AspectRatio(
+                  aspectRatio: 0.8,
+                  child: Image.network(
+                    cart.product.image,
+                    fit: BoxFit.cover,
+                  ),
+                ),
               ),
               Padding(
                 padding: EdgeInsets.only(left: 16.w),
@@ -32,18 +41,18 @@ class CartCard extends StatelessWidget {
                         SizedBox(
                           width: 113.w,
                           child: Text(
-                            "Me Bandage black dress",
-                            style: TextStyle(fontSize: 12),
+                            cart.product.title,
+                            style: const TextStyle(fontSize: 12),
                           ),
                         ),
                         SizedBox(width: 66.w),
-                        Text(r"$ 69.00"),
+                        Text("\$ ${cart.product.price.toStringAsFixed(2)}"),
                       ],
                     ),
                     SizedBox(height: 21.h),
                     Row(
                       children: [
-                        Text.rich(
+                        const Text.rich(
                           TextSpan(text: "Size: ", children: [
                             TextSpan(
                               text: "S",
@@ -57,7 +66,7 @@ class CartCard extends StatelessWidget {
                         ),
                         Row(
                           children: [
-                            Text(
+                            const Text(
                               "Color",
                               style: TextStyle(fontSize: 12, color: ColorPalette.appGrey),
                             ),
@@ -69,7 +78,7 @@ class CartCard extends StatelessWidget {
                               width: 14,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(4),
-                                color: Color(0xff222A2D),
+                                color: const Color(0xff222A2D),
                               ),
                             ),
                             SizedBox(width: 26.w),
@@ -79,13 +88,19 @@ class CartCard extends StatelessWidget {
                           children: [
                             AddRemoveButton(
                               icon: Icons.remove,
+                              onTap: () {
+                                Provider.of<CartViewModal>(context,listen: false).quantity(cart, -1);
+                              },
                             ),
                             Padding(
                               padding: EdgeInsets.symmetric(horizontal: 14.w),
-                              child: Text("1"),
+                              child: Text(cart.quantity.toString()),
                             ),
                             AddRemoveButton(
                               icon: Icons.add,
+                              onTap: () {
+                                Provider.of<CartViewModal>(context,listen: false).quantity(cart, 1);
+                              },
                             ),
                           ],
                         )
@@ -99,7 +114,7 @@ class CartCard extends StatelessWidget {
         ),
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 24.w),
-          child: Divider(),
+          child: const Divider(),
         )
       ],
     );
