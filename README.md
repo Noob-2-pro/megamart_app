@@ -1,6 +1,15 @@
 # zucosi_app
 
-A new Flutter project.
+A simple 2 page application created as an assignment to demonstrate
+
+- REST API integration using (fake store API)[http://fakestoreapi.com/docs]
+- state management using Provider.
+- proper folder structure.
+
+## Screens
+
+- a product list page using gridview and custom appbar 
+- A cart page diplaying price and total value in a dismissible listview in which user can change quantity.
 
 ## Getting Started
 
