@@ -8,12 +8,13 @@ A simple 2 page application created as an assignment to demonstrate
 
 ## Screens
 
-- a product list page using gridview and custom appbar.
+- A product list page using gridview and custom appbar.
 
-<img src="(https://github.com/Noob-2-pro/megamart_app/blob/main/screen1.png?raw=true)" width="300"> 
+<img src="https://github.com/Noob-2-pro/megamart_app/blob/main/screen1.png" width="300"> 
+
 - A cart page diplaying price and total value in a dismissible listview in which user can change quantity.
 
-<img src="(https://github.com/Noob-2-pro/megamart_app/blob/main/screen2.png?raw=true)" width="300"> 
+<img src="https://github.com/Noob-2-pro/megamart_app/blob/main/screen2.png" width="300"> 
 
 ## Getting Started
 
