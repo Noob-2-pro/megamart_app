@@ -1,34 +1,51 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:zucosi_app/core/modals/products.dart';
-import 'package:zucosi_app/core/viewModals/home_viewmodal.dart';
-import '../../../../config/color_palette.dart';
 import 'package:provider/provider.dart';
+import 'package:zucosi_app/core/modals/cart.dart';
+import 'package:zucosi_app/core/modals/products.dart';
+import 'package:zucosi_app/core/viewModals/cart_viewmodal.dart';
+import 'package:zucosi_app/core/viewModals/home_viewmodal.dart';
+import 'components/product_tile.dart';
 
-import '../../../core/viewModals/cart_viewmodal.dart';
-
-class ProductsScreen extends StatelessWidget {
-  ProductsScreen({
+class ProductsScreen extends StatefulWidget {
+  const ProductsScreen({
     Key? key,
   }) : super(key: key);
 
+  @override
+  State<ProductsScreen> createState() => _ProductsScreenState();
+}
+
+class _ProductsScreenState extends State<ProductsScreen> {
   final homeData = HomeViewModal();
+  late Future<List<Products>> productData;
+
+  @override
+  void initState() {
+    super.initState();
+    productData = homeData.getProducts();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 16.w),
       child: FutureBuilder<List<Products>>(
-          future: homeData.getProducts(),
+          future: productData,
           builder: (context, snapshot) {
             if (snapshot.hasError) {
               return Center(
-                child: Text("Oops , an error occured ! \n ${snapshot.error}"),
+                child: FittedBox(
+                    child: Text(
+                  "Oops , an error occured ! \n ${snapshot.error}",
+                  textAlign: TextAlign.center,
+                )),
               );
             }
             if (snapshot.hasData) {
               final products = snapshot.data!;
               return GridView.builder(
+                padding: const EdgeInsets.only(top: 6),
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
                   mainAxisSpacing: 13,
@@ -37,86 +54,18 @@ class ProductsScreen extends StatelessWidget {
                 ),
                 itemCount: products.length,
                 itemBuilder: (context, index) {
+                  final isAdded =
+                      Provider.of<CartViewModal>(context).items.contains(CartStuff(product: products[index]));
                   return ProductTile(
                     product: products[index],
+                    isAdded: isAdded,
+
                   );
                 },
               );
             }
             return const Center(child: CircularProgressIndicator());
           }),
-    );
-  }
-}
-
-class ProductTile extends StatelessWidget {
-  const ProductTile({
-    Key? key,
-    required this.product,
-  }) : super(key: key);
-
-  final Products product;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: Colors.white,
-      // width: 165.w,
-      // height: 270.h,
-      child: Column(
-        children: [
-          Image.network(
-            product.image,
-            height: 180.h,
-            width: double.infinity,
-            fit: BoxFit.cover,
-          ),
-          Padding(
-            padding: EdgeInsets.only(left: 12.w, top: 13.h),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  product.title,
-                  style: Theme.of(context).textTheme.overline?.copyWith(color: ColorPalette.textprimary),
-                  overflow: TextOverflow.ellipsis,
-                ),
-                Text(
-                  product.category,
-                  style: Theme.of(context).textTheme.caption,
-                  overflow: TextOverflow.ellipsis,
-                ),
-                Padding(
-                  padding: EdgeInsets.only(right: 13.5.w),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "\$ ${product.price}",
-                        style: Theme.of(context).textTheme.subtitle1,
-                      ),
-                      InkWell(
-                        onTap: () {
-                          context.read<CartViewModal>().addproducts(product, 1);
-                          ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                            content: Text("Product added to the cart"),
-                            duration: Duration(seconds: 2),
-                          ));
-                        },
-                        child: const Icon(
-                          Icons.shopping_bag_outlined,
-                          color: ColorPalette.appGrey,
-                        ),
-                      ),
-                    ],
-                  ),
-                )
-              ],
-            ),
-          ),
-        ],
-      ),
     );
   }
 }

@@ -4,7 +4,6 @@ import 'package:provider/provider.dart';
 import 'package:zucosi_app/config/navigation.dart';
 import 'package:zucosi_app/config/theme.dart';
 import 'package:zucosi_app/presentation/views/home/home_page.dart';
-
 import 'core/viewModals/cart_viewmodal.dart';
 
 void main() {
@@ -22,6 +21,7 @@ class MyApp extends StatelessWidget {
         return ChangeNotifierProvider<CartViewModal>(
           create: (context) => CartViewModal(),
           child: MaterialApp(
+            title: "MegaMart",
             home: const HomePage(),
             theme: theme(),
             debugShowCheckedModeBanner: false,

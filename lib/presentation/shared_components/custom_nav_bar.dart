@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:zucosi_app/presentation/views/cart/cart_screen.dart';
 
 import '../../config/color_palette.dart';
-import '../../constants.dart';
 
 class CustomNavBar extends StatelessWidget {
   const CustomNavBar({Key? key}) : super(key: key);
@@ -10,19 +10,19 @@ class CustomNavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 96.h,
-      color: const Color(0xffFEFEFE),
+      height: 70.h,
+      color: ColorPalette.appBarColor,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-         const NavBarButton(
+          const NavBarButton(
             text: "Home",
             image: 'assets/images/home.png',
           ),
           GestureDetector(
             onTap: () {
-              Navigator.pushNamed(context, kCartRoute);
+              Navigator.pushNamed(context, CartScreen.kCartRoute);
             },
             child: Padding(
               padding: const EdgeInsets.all(8.0),

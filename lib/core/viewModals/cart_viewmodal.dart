@@ -5,21 +5,25 @@ import '../modals/products.dart';
 class CartViewModal extends ChangeNotifier {
   final List<CartStuff> _addedproduct = [];
   double totalPrice = 0;
-  List get items => _addedproduct;
+  List<CartStuff> get items => _addedproduct;
 
-  void addproducts(Products product, int? quantity) {
+  void addproducts({required Products product, int? quantity}) {
     final cartstuff = CartStuff(product: product, quantity: quantity ?? 1);
+
     if (_addedproduct.contains(cartstuff)) {
+      // increase the quantity of product
       int index = _addedproduct.indexWhere((element) => element == cartstuff);
       _addedproduct[index].quantity++;
     } else {
+      // add new product
       _addedproduct.add(cartstuff);
+
     }
     total();
     notifyListeners();
   }
 
-  void removeproduct(item) {
+  void removeproduct(CartStuff item) {
     _addedproduct.remove(item);
     total();
     notifyListeners();
@@ -28,12 +32,12 @@ class CartViewModal extends ChangeNotifier {
   void quantity(CartStuff cartStuff, int counter) {
     if (counter == -1) {
       if (cartStuff.quantity > 1) {
-        cartStuff.quantity = cartStuff.quantity + counter;
-      } else if (counter == -1) {
+        cartStuff.quantity += counter;
+      } else {
         _addedproduct.remove(cartStuff);
       }
     } else if (counter == 1) {
-      cartStuff.quantity = cartStuff.quantity + counter;
+      cartStuff.quantity += counter;
     }
 
     total();

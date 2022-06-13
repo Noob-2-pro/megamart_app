@@ -1,1 +1,0 @@
- const String kCartRoute = "/cartScreen";

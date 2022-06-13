@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:zucosi_app/constants.dart';
-import 'package:zucosi_app/presentation/views/cart/cart_screen.dart';
 import 'package:zucosi_app/presentation/views/home/home_page.dart';
+
+import '../presentation/views/cart/cart_screen.dart';
 
 
 class RoutesGenerator {
@@ -9,7 +9,7 @@ class RoutesGenerator {
     switch (settings.name) {
       case '/':
         return MaterialPageRoute(builder: (_) => const HomePage());
-      case kCartRoute:
+      case CartScreen.kCartRoute:
         return MaterialPageRoute(builder: (_) => const CartScreen());
 
       default:
