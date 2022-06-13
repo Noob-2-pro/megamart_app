@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import 'package:zucosi_app/core/modals/cart.dart';
-import 'package:zucosi_app/core/modals/products.dart';
 import 'package:zucosi_app/core/viewModals/cart_viewmodal.dart';
 import 'package:zucosi_app/core/viewModals/home_viewmodal.dart';
-import 'components/product_tile.dart';
+import 'components/components.dart';
+import 'package:zucosi_app/core/modals/modals.dart';
 
 class ProductsScreen extends StatefulWidget {
   const ProductsScreen({
@@ -59,7 +58,6 @@ class _ProductsScreenState extends State<ProductsScreen> {
                   return ProductTile(
                     product: products[index],
                     isAdded: isAdded,
-
                   );
                 },
               );

@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:zucosi_app/core/modals/cart.dart';
 import '../../../../config/color_palette.dart';
 import 'package:provider/provider.dart';
-import '../../../../core/modals/products.dart';
 import '../../../../core/viewModals/cart_viewmodal.dart';
+import '../../../../core/modals/modals.dart';
 
 class ProductTile extends StatelessWidget {
   const ProductTile({

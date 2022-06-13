@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:zucosi_app/core/viewModals/cart_viewmodal.dart';
-import 'package:zucosi_app/presentation/views/cart/cart_screen.dart';
 import '../../../../config/color_palette.dart';
+import '../../cart/cart_screen.dart';
 
 class CustomAppBar extends StatelessWidget {
   const CustomAppBar({Key? key}) : super(key: key);

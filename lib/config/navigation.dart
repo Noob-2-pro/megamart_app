@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:zucosi_app/presentation/views/home/home_page.dart';
 
-import '../presentation/views/cart/cart_screen.dart';
-
+import '../views/cart/cart_screen.dart';
+import '../views/home/home_page.dart';
 
 class RoutesGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {

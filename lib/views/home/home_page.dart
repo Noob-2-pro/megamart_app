@@ -14,7 +14,6 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return const Scaffold(
       appBar: PreferredSize(preferredSize: Size.fromHeight(75), child: CustomAppBar()),
-      // bottomNavigationBar:  CustomNavBar(),
       body: ProductsScreen(),
     );
   }
