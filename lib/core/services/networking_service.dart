@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:zucosi_app/core/modals/products.dart';
 
@@ -7,6 +8,9 @@ class Networking {
   var client = http.Client();
 
   Future<List<Products>> getProducts() async {
+    if (kDebugMode) {
+      print("getting products");
+    }
     List<Products> products = [];
     try {
       var url = Uri.parse("$endPoint/products");

@@ -1,11 +1,14 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import 'package:zucosi_app/config/color_palette.dart';
 import 'package:zucosi_app/core/viewModals/cart_viewmodal.dart';
 import 'components/cart_card.dart';
 
 class CartScreen extends StatelessWidget {
+  static const String kCartRoute = "/cartScreen";
   const CartScreen({Key? key}) : super(key: key);
 
   @override
@@ -14,8 +17,8 @@ class CartScreen extends StatelessWidget {
       appBar: AppBar(
         iconTheme: const IconThemeData(color: Colors.black),
         backgroundColor: const Color(0xffE5E5E5),
-        elevation: 0,
-        toolbarHeight: 152.h,
+        elevation: 2,
+        toolbarHeight: 75.h,
         centerTitle: true,
         title: Text(
           "Your Cart",
@@ -57,15 +60,15 @@ class Body extends StatelessWidget {
             children: List.generate(cart.items.length, (index) {
               final item = cart.items[index];
               return Dismissible(
+                key: ValueKey(item),
                 background: Container(
                   color: ColorPalette.appBlack.withOpacity(0.5),
                 ),
-                key: ValueKey(item),
                 onDismissed: (DismissDirection direction) {
                   Provider.of<CartViewModal>(context, listen: false).removeproduct(item);
                 },
                 child: CartCard(
-                  cart: cart.items[index],
+                  cartItem: cart.items[index],
                 ),
               );
             }),
@@ -93,12 +96,18 @@ class Body extends StatelessWidget {
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.resolveWith((states) => ColorPalette.appBlack),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    if (Platform.isAndroid) {
+                      Fluttertoast.showToast(msg: "successful payment");
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("successful payment")));
+                    }
+                  },
                   child: SizedBox(
                       height: 64.h,
                       child: Center(
                         child: Text(
-                          'Payment',
+                          'Proceed to pay',
                           style: TextStyle(fontSize: ScreenUtil().scaleText * 16),
                         ),
                       )),

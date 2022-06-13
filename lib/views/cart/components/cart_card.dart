@@ -2,31 +2,30 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:zucosi_app/core/viewModals/cart_viewmodal.dart';
-
 import '../../../../config/color_palette.dart';
 import '../../../../core/modals/cart.dart';
 import 'add_remove_button.dart';
 
 class CartCard extends StatelessWidget {
-  const CartCard({Key? key, required this.cart}) : super(key: key);
+  const CartCard({Key? key, required this.cartItem}) : super(key: key);
 
-  final CartStuff cart;
+  final CartStuff cartItem;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         Container(
-          padding: EdgeInsets.symmetric(vertical: 24.w),
+          padding: EdgeInsets.symmetric(vertical: 20.w),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(
+              Container(
                 width: 80,
                 height: 80,
+                color: Colors.white,
                 child: Image.network(
-                  cart.product.image,
-                  fit: BoxFit.cover,
+                  cartItem.product.image,
                 ),
               ),
               Padding(
@@ -39,16 +38,18 @@ class CartCard extends StatelessWidget {
                         SizedBox(
                           width: 113.w,
                           child: Text(
-                            cart.product.title,
+                            cartItem.product.title,
                             style: const TextStyle(fontSize: 12),
                           ),
                         ),
                         SizedBox(width: 60.w),
-                        Text("\$ ${cart.product.price.toStringAsFixed(2)}"),
+                        FittedBox(child: Text("\$ ${cartItem.product.price.toStringAsFixed(2)}")),
                       ],
                     ),
-                    SizedBox(height: 21.h),
+                    SizedBox(height: 20.h),
                     Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         const Text.rich(
                           TextSpan(text: "Size: ", children: [
@@ -63,6 +64,7 @@ class CartCard extends StatelessWidget {
                           width: 24.w,
                         ),
                         Row(
+                          mainAxisSize: MainAxisSize.min,
                           children: [
                             const Text(
                               "Color",
@@ -79,25 +81,26 @@ class CartCard extends StatelessWidget {
                                 color: const Color(0xff222A2D),
                               ),
                             ),
-                            SizedBox(width: 26.w),
                           ],
                         ),
+                        SizedBox(width: 18.w),
                         Row(
+                          mainAxisSize: MainAxisSize.min,
                           children: [
                             AddRemoveButton(
                               icon: Icons.remove,
                               onTap: () {
-                                Provider.of<CartViewModal>(context, listen: false).quantity(cart, -1);
+                                Provider.of<CartViewModal>(context, listen: false).quantity(cartItem, -1);
                               },
                             ),
                             Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 14.w),
-                              child: Text(cart.quantity.toString()),
+                              padding: EdgeInsets.symmetric(horizontal: 12.w),
+                              child: FittedBox(child: Text(cartItem.quantity.toString())),
                             ),
                             AddRemoveButton(
                               icon: Icons.add,
                               onTap: () {
-                                Provider.of<CartViewModal>(context, listen: false).quantity(cart, 1);
+                                Provider.of<CartViewModal>(context, listen: false).quantity(cartItem, 1);
                               },
                             ),
                           ],
